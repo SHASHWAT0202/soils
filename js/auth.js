@@ -1,4 +1,4 @@
-const apiUrl = 'https://smart-soil.onrender.com'; // Adjust if necessary
+const apiUrl = 'https://smart-soil.onrender.com/api'; // Adjust if necessary
 
 // Handle OTP Request
 const sendOtpBtn = document.getElementById('sendOtp');
