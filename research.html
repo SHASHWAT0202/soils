@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Research - Agri Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Reset & Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: url('grassback.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+      /* Space for fixed header & footer */
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+    
+    /* Fixed Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to right, #4CAF50, #795548);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      color: #fff;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+    header .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    header .logo h1 {
+      font-size: 1.5em;
+    }
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover {
+      color: #ddd;
+    }
+    
+    /* Research Container (Translucent Card) */
+    .research-container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* Search Bar */
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .search-bar input[type="text"] {
+      width: 80%;
+      max-width: 500px;
+      padding: 15px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+    }
+    .search-bar button {
+      padding: 15px 20px;
+      font-size: 1rem;
+      border: none;
+      background: #5563DE;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 0 5px 5px 0;
+      transition: background 0.3s ease;
+    }
+    .search-bar button:hover {
+      background: #4353b3;
+    }
+    
+    /* Cards Container */
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    /* Fixed Footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Increased height for better spacing */
+  background: #2E7D32; /* Consistent color with header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  gap: 10px; /* Adds spacing between elements */
+}
+
+/* Footer Logo */
+footer img {
+  height: 40px; /* Adjusted for better visibility */
+  width: auto;
+  margin-right: 10px; /* Space between logo and text */
+}
+
+/* Footer Text */
+footer p {
+  margin: 0;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+    /* Research Paper Card */
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      padding: 20px;
+      width: 300px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: floatIn 0.8s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    }
+    .card h3 {
+      color: #5563DE;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Fixed Footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: linear-gradient(to right, #4CAF50, #795548);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding: 0 20px;
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Header with Logo -->
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="Smart-Soil Logo" />
+      <h1>Smart-Soil</h1>
+    </div>
+    <nav>
+      <a href="dashboard.html">Home</a>
+      <a href="https://smart-soil-ai-analyser.onrender.com/">Soil Analysis</a>
+      <a href="soil.html">Chat with us</a>
+      <a href="subscribe.html">Logout</a>
+    </nav>
+  </header>
+  
+  <!-- Research Section -->
+  <section class="research-container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search research papers..." />
+      <button id="searchBtn">Search</button>
+    </div>
+    <div class="cards-container" id="cardsContainer">
+      <!-- Research paper cards will be injected here -->
+    </div>
+  </section>
+  
+  <!-- Fixed Footer -->
+  <footer>
+    <img src="images/logo.png" alt="Smart Soil Logo" />
+    <p>&copy; 2025 Smart Soil - All Rights Reserved</p>
+  </footer>
+  
+  <script>
+    // Sample data for research papers
+    const researchPapers = [
+  {
+    title: "Innovations in Sustainable Agriculture",
+    author: "Dr. Jane Doe",
+    description: "A comprehensive study on sustainable farming techniques and modern agricultural innovations.",
+    link: "https://example.com/research1"
+  },
+  {
+    title: "The Impact of Climate Change on Crop Yield",
+    author: "Dr. John Smith",
+    description: "An analysis of how changing climate conditions affect crop production and food security.",
+    link: "https://example.com/research2"
+  },
+  {
+    title: "Advancements in Soil Health Management",
+    author: "Dr. Emily Davis",
+    description: "Exploring modern methods to improve soil fertility and combat soil degradation.",
+    link: "https://example.com/research3"
+  },
+  {
+    title: "Precision Agriculture: A Technological Approach",
+    author: "Dr. Mark Wilson",
+    description: "An overview of precision agriculture techniques and the role of data analytics in farming.",
+    link: "https://example.com/research4"
+  },
+  {
+    title: "Organic Farming and Its Benefits",
+    author: "Dr. Lisa Ray",
+    description: "Examining the benefits of organic farming practices and their impact on health and environment.",
+    link: "https://example.com/research5"
+  },
+  {
+    title: "Agroforestry: A Sustainable Approach",
+    author: "Dr. Samuel Green",
+    description: "How agroforestry integrates trees and shrubs into agricultural landscapes for sustainability.",
+    link: "https://example.com/research6"
+  },
+  {
+    title: "Soil Microbiology and Its Role in Agriculture",
+    author: "Dr. Rachel White",
+    description: "Understanding the role of microbes in soil health and plant growth.",
+    link: "https://example.com/research7"
+  },
+  {
+    title: "The Future of Vertical Farming",
+    author: "Dr. Henry Gold",
+    description: "A study on vertical farming and its potential to revolutionize food production.",
+    link: "https://example.com/research8"
+  },
+  {
+    title: "Climate-Smart Agriculture Practices",
+    author: "Dr. Olivia Carter",
+    description: "Techniques and practices to adapt and mitigate climate change effects in agriculture.",
+    link: "https://example.com/research9"
+  },
+  {
+    title: "Hydroponics and Its Efficiency",
+    author: "Dr. Alex Brown",
+    description: "An in-depth look at hydroponic farming and its efficiency compared to traditional soil farming.",
+    link: "https://example.com/research10"
+  },
+  {
+    title: "Crop Rotation: A Time-Tested Technique",
+    author: "Dr. Benjamin Moore",
+    description: "The benefits of crop rotation for soil health and pest control.",
+    link: "https://example.com/research11"
+  },
+  {
+    title: "Drones in Agriculture: A Technological Leap",
+    author: "Dr. Kevin Adams",
+    description: "How drones are transforming precision agriculture and farm monitoring.",
+    link: "https://example.com/research12"
+  },
+  {
+    title: "Genetically Modified Crops: Myths vs. Facts",
+    author: "Dr. Laura Green",
+    description: "Separating myths from facts about genetically modified crops and their impact.",
+    link: "https://example.com/research13"
+  },
+  {
+    title: "Pest Control in Organic Farming",
+    author: "Dr. Nathan Harris",
+    description: "Techniques and strategies for controlling pests in organic farming without synthetic chemicals.",
+    link: "https://example.com/research14"
+  },
+  {
+    title: "The Role of Artificial Intelligence in Agriculture",
+    author: "Dr. Emma Watson",
+    description: "How AI and machine learning are optimizing agricultural practices.",
+    link: "https://example.com/research15"
+  },
+  {
+    title: "Water Conservation Techniques for Farmers",
+    author: "Dr. Daniel King",
+    description: "Innovative ways to conserve water in agriculture and minimize waste.",
+    link: "https://example.com/research16"
+  },
+  {
+    title: "Smart Irrigation Systems: The Future of Watering",
+    author: "Dr. William Brown",
+    description: "How IoT-based smart irrigation is helping farmers optimize water use.",
+    link: "https://example.com/research17"
+  },
+  {
+    title: "Biodiversity and Its Importance in Agriculture",
+    author: "Dr. Sarah Thompson",
+    description: "The significance of biodiversity in maintaining ecosystem balance in farms.",
+    link: "https://example.com/research18"
+  },
+  {
+    title: "The Role of Blockchain in Agricultural Supply Chains",
+    author: "Dr. Christopher Lee",
+    description: "How blockchain technology is enhancing transparency and efficiency in agriculture.",
+    link: "https://example.com/research19"
+  },
+  {
+    title: "Plant-Based Fertilizers: An Eco-Friendly Alternative",
+    author: "Dr. Emily Foster",
+    description: "Exploring the benefits of plant-based fertilizers over chemical alternatives.",
+    link: "https://example.com/research20"
+  },
+  {
+    title: "Urban Farming: Challenges and Opportunities",
+    author: "Dr. Patrick Miller",
+    description: "How urban farming is reshaping food production in cities.",
+    link: "https://example.com/research21"
+  },
+  {
+    title: "The Science Behind Companion Planting",
+    author: "Dr. Robert Wilson",
+    description: "How companion planting helps improve yield and control pests naturally.",
+    link: "https://example.com/research22"
+  },
+  {
+    title: "The Economics of Small-Scale Farming",
+    author: "Dr. Elizabeth Turner",
+    description: "Understanding the financial sustainability of small-scale agricultural businesses.",
+    link: "https://example.com/research23"
+  },
+  {
+    title: "AI-Powered Crop Disease Detection",
+    author: "Dr. Michael Chen",
+    description: "How artificial intelligence is being used to detect and prevent crop diseases.",
+    link: "https://example.com/research24"
+  },
+  {
+    title: "The Impact of Soil Erosion on Agriculture",
+    author: "Dr. Sophia Martinez",
+    description: "A deep dive into how soil erosion affects farming and how to combat it.",
+    link: "https://example.com/research25"
+  }
+];
+
+    
+    // Function to render research cards
+    function renderCards(papers) {
+      const container = document.getElementById('cardsContainer');
+      container.innerHTML = '';
+      
+      papers.forEach(paper => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${paper.title}</h3>
+          <p><strong>Author:</strong> ${paper.author}</p>
+          <p>${paper.description}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+    
+    // Function to search research papers
+    function searchPapers() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = researchPapers.filter(paper =>
+        paper.title.toLowerCase().includes(query) ||
+        paper.author.toLowerCase().includes(query) ||
+        paper.description.toLowerCase().includes(query)
+      );
+      renderCards(filtered);
+    }
+    
+    // Initial render with all papers
+    renderCards(researchPapers);
+    
+    // Event listeners for search
+    document.getElementById('searchBtn').addEventListener('click', searchPapers);
+    document.getElementById('searchInput').addEventListener('input', searchPapers);
+  </script>
+</body>
+</html>

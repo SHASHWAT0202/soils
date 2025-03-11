@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe to Access | Smart Soil</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('grassback.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: #333;
+            padding-top: 80px;
+            padding-bottom: 60px;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to right, #4CAF50, #795548);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: #fff;
+        }
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+        header .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        header h1 {
+            font-size: 1.5em;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #ddd;
+        }
+        .container {
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            margin: auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .pay-btn {
+            background: #2E7D32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .pay-btn:hover {
+            background: #1B5E20;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #2E7D32;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        footer img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Smart Soil Logo">
+            <h1>Smart Soil</h1>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="register.html">Register</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1>Access Restricted</h1>
+        <p>To proceed to login, a small access fee of ₹5 is required.</p>
+        <button class="pay-btn" onclick="payNow(500)">Pay ₹5</button>
+    </div>
+    
+    <footer>
+        <img src="images/logo.png" alt="Smart Soil Logo">
+        <p>&copy; 2025 Smart Soil - All Rights Reserved</p>
+    </footer>
+    
+    <script>
+        function payNow(amount) {
+            var options = {
+                key: 'rzp_test_uQFcbINAsDfHoi',
+                amount: amount,
+                currency: 'INR',
+                name: 'Smart Soil Access Fee',
+                description: 'Unlock login access',
+                handler: function (response) {
+                    alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
+                    window.location.href = 'login.html';
+                },
+                theme: {
+                    color: "#2E7D32"
+                }
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
+        }
+    </script>
+</body>
+</html>

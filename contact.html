@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us - Agri Solutions</title>
+  <style>
+    /* Reset & Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    /* Fixed Footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Increased height for better spacing */
+  background: #2E7D32; /* Consistent color with header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  gap: 10px; /* Adds spacing between elements */
+}
+
+/* Footer Logo */
+footer img {
+  height: 40px; /* Adjusted for better visibility */
+  width: auto;
+  margin-right: 10px; /* Space between logo and text */
+}
+
+/* Footer Text */
+footer p {
+  margin: 0;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+    body {
+      font-family: Arial, sans-serif;
+      background: url('grassback.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+      /* Leave space for fixed header & footer */
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+    
+    /* Fixed Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to right, #4CAF50, #795548);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      color: #fff;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+    header .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    header h1 {
+      font-size: 1.5em;
+    }
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover {
+      color: #ddd;
+    }
+    
+    /* Fixed Footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: linear-gradient(to right, #4CAF50, #795548);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding: 0 20px;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+    
+    /* Translucent Card Style */
+    .card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+    
+    /* Contact Header Section */
+    #contact-header {
+      padding: 60px 20px;
+      margin: 20px auto;
+    }
+    #contact-header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #0066cc;
+      animation: slideDown 1.5s ease-in-out;
+    }
+    #contact-header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+      animation: fadeIn 2s ease-in-out;
+      color: #333;
+    }
+    
+    /* Contact Info Cards */
+    #contact-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 50px 20px;
+      margin-top: 20px;
+    }
+    .contact-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin: 20px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 250px;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+    .contact-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    .contact-card img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+    }
+    .contact-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #0066cc;
+    }
+    .contact-card p {
+      font-size: 1rem;
+      color: #333;
+    }
+    .contact-card a {
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .contact-card a:hover {
+      color: #ff6b6b;
+    }
+    
+    /* Keyframe Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Header -->
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="Agri Solutions Logo" />
+      <h1>Agri Solutions</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="register.html">Register Now</a>
+    </nav>
+  </header>
+  
+  <!-- Contact Header Section -->
+  <section id="contact-header" class="card">
+    <h1>Contact Us</h1>
+    <p>
+      Reach out to us for support, queries, or suggestions. We are here to help you enhance your agricultural practices.
+    </p>
+  </section>
+  
+  <!-- Contact Info Section -->
+  <section id="contact-info">
+    <div class="contact-card">
+      <img src="mail.jpg" alt="Email Icon" />
+      <h3>Email Us</h3>
+      <p><a href="mailto:support@agrisolutions.com">support@agrisolutions.com</a></p>
+    </div>
+    <div class="contact-card">
+      <img src="phone.jpg" alt="Phone Icon" />
+      <h3>Call Us</h3>
+      <p><a href="tel:+91">+91 9794177498</a></p>
+    </div>
+    <div class="contact-card">
+      <img src="location.jpg" alt="Location Icon" />
+      <h3>Visit Us</h3>
+      <p>Plot 8-11, Wellness Zone, Greater Noida, UP, India</p>
+    </div>
+  </section>
+  
+  <!-- Fixed Footer -->
+  <footer>
+    <img src="images/logo.png" alt="Smart Soil Logo" />
+    <p>&copy; 2025 Smart Soil - All Rights Reserved</p>
+  </footer>
+  
+  <script src="js/main.js"></script>
+</body>
+</html>
