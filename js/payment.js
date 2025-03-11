@@ -1,4 +1,4 @@
-const apiUrl = 'https://smart-soil.onrender.com';
+const apiUrl = 'https://smart-soil.onrender.com/api';
 
 document.addEventListener('DOMContentLoaded', () => {
   const analysisForm   = document.getElementById('analysisForm');
