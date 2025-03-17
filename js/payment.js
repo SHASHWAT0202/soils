@@ -1,4 +1,4 @@
-const apiUrl = 'https://smart-soil.onrender.com/api';
+const apiUrl = 'https://backend-x-nine.vercel.app/api';
 
 document.addEventListener('DOMContentLoaded', () => {
   const analysisForm   = document.getElementById('analysisForm');
