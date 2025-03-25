@@ -3,7 +3,6 @@ const PROTECTED_PAGES = [
     'login.html',
     'register.html',
     'dashboard.html',
-    'dashboard.html',
     'research.html'
 ];
 
@@ -21,34 +20,48 @@ function checkPageAccess() {
     
     // If it's a protected page, verify payment
     if (PROTECTED_PAGES.includes(currentPage)) {
-        verifyPaymentStatus();
+        if (!verifyPaymentStatus()) {
+            redirectToSubscribe();
+            return false;
+        }
+        return true;
     }
+    return true;
 }
 
 // Verify payment status
 function verifyPaymentStatus() {
     const paymentVerified = localStorage.getItem('paymentVerified');
     const paymentTimestamp = localStorage.getItem('paymentTimestamp');
+    const sessionId = localStorage.getItem('sessionId');
     
-    // Check if payment is verified and not expired (24 hours)
+    // Check if all required session data exists
+    if (!paymentVerified || !paymentTimestamp || !sessionId) {
+        return false;
+    }
+    
+    // Check if payment is verified and not expired (1 minute)
     if (paymentVerified === 'true' && paymentTimestamp) {
         const now = new Date().getTime();
         const paymentTime = parseInt(paymentTimestamp);
-        const hoursSincePayment = (now - paymentTime) / (1000 * 60 * 60);
+        const minutesSincePayment = (now - paymentTime) / (1000 * 60);
         
-        if (hoursSincePayment < 24) {
+        if (minutesSincePayment < 10) {
             return true;
         } else {
             // Payment expired
-            localStorage.removeItem('paymentVerified');
-            localStorage.removeItem('paymentTimestamp');
-            redirectToSubscribe();
+            clearSession();
             return false;
         }
-    } else {
-        redirectToSubscribe();
-        return false;
     }
+    return false;
+}
+
+// Clear session data
+function clearSession() {
+    localStorage.removeItem('paymentVerified');
+    localStorage.removeItem('paymentTimestamp');
+    localStorage.removeItem('sessionId');
 }
 
 // Redirect to subscribe page
@@ -68,5 +81,7 @@ function initSession() {
 // Run on page load
 document.addEventListener('DOMContentLoaded', () => {
     initSession();
-    checkPageAccess();
+    if (!checkPageAccess()) {
+        return; // Stop further execution if access is denied
+    }
 }); 
