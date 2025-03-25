@@ -1,13 +1,5 @@
 const apiUrl = 'https://backend-x-nine.vercel.app/api'; // Adjust if necessary
 
-// Check payment verification on page load
-document.addEventListener('DOMContentLoaded', () => {
-  const paymentVerified = localStorage.getItem('paymentVerified');
-  if (!paymentVerified && window.location.pathname.includes('login.html')) {
-    window.location.href = 'subscribe.html';
-  }
-});
-
 // Handle OTP Request
 const sendOtpBtn = document.getElementById('sendOtp');
 if (sendOtpBtn) {
