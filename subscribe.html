@@ -15,8 +15,9 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background: url('grassback.jpg') no-repeat center center fixed;
+            background: url('grassback.jpg') no-repeat center center;
             background-size: cover;
+            background-attachment: fixed;
             font-family: Arial, sans-serif;
             color: #333;
             padding-top: 80px;
@@ -60,26 +61,37 @@
         }
         .container {
             max-width: 400px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(5px);
-            padding: 20px;
-            margin: auto;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            border-radius: 10px;
+            padding: 30px;
+            margin: 100px auto 80px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            border-radius: 8px;
             text-align: center;
         }
+        .container h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        .container p {
+            margin-bottom: 25px;
+            color: #666;
+            line-height: 1.6;
+        }
         .pay-btn {
-            background: #2E7D32;
+            background: linear-gradient(to right, #4CAF50, #45a049);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 4px;
             font-size: 16px;
-            margin-top: 10px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
         }
         .pay-btn:hover {
-            background: #1B5E20;
+            transform: translateY(-2px);
         }
         footer {
             position: fixed;
@@ -87,16 +99,18 @@
             left: 0;
             right: 0;
             height: 60px;
-            background: #2E7D32;
+            background: linear-gradient(to right, #4CAF50, #795548);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 10px 20px;
-            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
             z-index: 1000;
+            gap: 10px;
         }
         footer img {
             height: 40px;
+            width: auto;
             margin-right: 10px;
         }
         footer p {
@@ -115,15 +129,16 @@
         </div>
         <nav>
             <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
+            <a href="shop.html">Shop Now</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
             <a href="register.html">Register</a>
         </nav>
     </header>
     
     <div class="container">
         <h1>Access Restricted</h1>
-        <p>To proceed to login, a small access fee of ₹5 is required.</p>
+        <p>To proceed to login, a small access fee of ₹5 is required. This helps us maintain our services and provide you with the best agricultural insights.</p>
         <button class="pay-btn" onclick="payNow(500)">Pay ₹5</button>
     </div>
     
@@ -133,6 +148,9 @@
     </footer>
     
     <script>
+        // Clear any existing payment verification
+        localStorage.removeItem('paymentVerified');
+
         function payNow(amount) {
             var options = {
                 key: 'rzp_test_uQFcbINAsDfHoi',
@@ -141,11 +159,26 @@
                 name: 'Smart Soil Access Fee',
                 description: 'Unlock login access',
                 handler: function (response) {
-                    alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
-                    window.location.href = 'login.html';
+                    if (response.razorpay_payment_id) {
+                        localStorage.setItem('paymentVerified', 'true');
+                        alert('Payment Successful! Redirecting to login...');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 500);
+                    }
+                },
+                modal: {
+                    ondismiss: function() {
+                        alert('Payment cancelled. Please complete payment to access login.');
+                    }
                 },
                 theme: {
-                    color: "#2E7D32"
+                    color: "#4CAF50"
+                },
+                prefill: {
+                    name: '',
+                    email: '',
+                    contact: ''
                 }
             };
             var rzp = new Razorpay(options);
