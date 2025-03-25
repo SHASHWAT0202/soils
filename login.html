@@ -181,7 +181,7 @@
     </nav>
   </header>
 
-  <div class="auth-container">
+  <div class="auth-container" id="authContainer" style="display: none;">
     <h2>Login</h2>
     <form id="loginForm">
       <input type="email" id="email" placeholder="Email" required />
@@ -191,19 +191,26 @@
     <p>Don't have an account? <a href="register.html">Register here</a></p>
   </div>
 
+  <div id="loadingMessage" style="text-align: center; margin-top: 100px; color: white; font-size: 1.2em;">
+    Verifying payment status...
+  </div>
+
   <footer>
     <img src="images/logo.png" alt="Smart Soil Logo" />
     <p>&copy; 2025 Smart Soil - All Rights Reserved</p>
   </footer>
 
+  <script src="js/session.js"></script>
   <script>
-    // Check if payment is verified immediately
-    (function() {
-      const paymentVerified = localStorage.getItem('paymentVerified');
-      if (paymentVerified !== 'true') {
-        window.location.href = 'subscribe.html';
-      }
-    })();
+    // Show loading message while verifying
+    document.getElementById('loadingMessage').style.display = 'block';
+    document.getElementById('authContainer').style.display = 'none';
+
+    // Check payment status
+    if (verifyPaymentStatus()) {
+      document.getElementById('loadingMessage').style.display = 'none';
+      document.getElementById('authContainer').style.display = 'block';
+    }
   </script>
   <script src="js/auth.js"></script>
 </body>
