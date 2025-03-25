@@ -2,24 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Login - Agri Solutions</title>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <title>Login - Smart Soil</title>
   <style>
-    /* Ensure html/body fill the entire viewport */
-    html, body {
+    /* Reset & Global Styles */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
       height: 100%;
     }
 
-    /* Full-screen background image */
     body {
       font-family: Arial, sans-serif;
       background: url('grassback.jpg') no-repeat center center;
       background-size: cover;
-      /* Uncomment the following if you want the background to remain fixed:
-         background-attachment: fixed;
-      */
+      background-attachment: fixed;
+      color: #333;
+      line-height: 1.6;
+      padding-top: 80px;
+      padding-bottom: 60px;
     }
 
     /* Fixed Header */
@@ -32,9 +36,10 @@
       background: linear-gradient(to right, #4CAF50, #795548);
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 0 20px;
       z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       color: #fff;
     }
 
@@ -52,135 +57,72 @@
       font-size: 1.5em;
     }
 
-    header nav {
-      margin-left: auto;
-    }
-
-    header nav a {
-      margin: 0 15px;
-      text-decoration: none;
+    nav a {
       color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
       font-weight: bold;
       transition: color 0.3s ease;
     }
 
-    header nav a:hover {
+    nav a:hover {
       color: #ddd;
     }
 
-    /* Fixed Footer */
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 50px;
-      background: linear-gradient(to right, #4CAF50, #795548);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      padding: 0 20px;
-      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-    }
-
-    footer .footer-logo {
-      display: flex;
-      align-items: center;
-      margin-right: 10px;
-    }
-
-    footer .footer-logo img {
-      height: 30px;
-    }
-
-    /* Auth Container (Login Card) */
+    /* Auth Container */
     .auth-container {
       max-width: 400px;
-      /* Margin so it doesn't overlap header/footer */
       margin: 100px auto 80px auto;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(5px);
-      padding: 20px;
+      padding: 30px;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
     .auth-container h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #333;
-    }
-
-    /* Add new styles for payment container */
-    .payment-container {
-      max-width: 400px;
-      margin: 100px auto 80px auto;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(5px);
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      text-align: center;
-    }
-    
-    .payment-container h2 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-    
-    .payment-container p {
-      margin-bottom: 20px;
-      color: #666;
-    }
-    
-    .payment-container button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      border: none;
-      border-radius: 4px;
-      color: #fff;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    .payment-container button:hover {
-      background-color: #45a049;
+      color: #4CAF50;
     }
 
     .auth-container form {
       display: flex;
       flex-direction: column;
+      gap: 15px;
     }
 
     .auth-container form input {
-      margin-bottom: 15px;
-      padding: 10px;
+      padding: 12px;
       font-size: 1em;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       border-radius: 4px;
+      transition: border-color 0.3s ease;
+    }
+
+    .auth-container form input:focus {
+      outline: none;
+      border-color: #4CAF50;
     }
 
     .auth-container form button {
-      padding: 10px;
-      background-color: #4CAF50;
+      padding: 12px;
+      background: linear-gradient(to right, #4CAF50, #45a049);
       border: none;
       border-radius: 4px;
       color: #fff;
       font-size: 1em;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .auth-container form button:hover {
-      background-color: #45a049;
+      transform: translateY(-2px);
     }
 
     .auth-container p {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 20px;
     }
 
     .auth-container p a {
@@ -192,33 +134,54 @@
     .auth-container p a:hover {
       text-decoration: underline;
     }
+
+    /* Fixed Footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to right, #4CAF50, #795548);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      gap: 10px;
+    }
+
+    footer img {
+      height: 40px;
+      width: auto;
+      margin-right: 10px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 1rem;
+      color: #fff;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <!-- Logo space in navbar -->
-      <img src="images/logo.png" alt="Agri Solutions Logo" />
-      <h1>Agri Solutions</h1>
+      <img src="images/logo.png" alt="Smart Soil Logo" />
+      <h1>Smart Soil</h1>
     </div>
     <nav>
       <a href="index.html">Home</a>
       <a href="shop.html">Shop Now</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
-      <a href="login.html">Login</a>
+      <a href="subscribe.html">Login</a>
     </nav>
   </header>
 
-  <!-- Payment Container (shown by default) -->
-  <div id="paymentContainer" class="payment-container">
-    <h2>Access Restricted</h2>
-    <p>To proceed to login, a small access fee of ₹5 is required.</p>
-    <button onclick="payNow(500)">Pay ₹5</button>
-  </div>
-
-  <!-- Login Container (hidden by default) -->
-  <div id="loginContainer" class="card auth-container" style="display: none;">
+  <div class="auth-container">
     <h2>Login</h2>
     <form id="loginForm">
       <input type="email" id="email" placeholder="Email" required />
@@ -234,39 +197,13 @@
   </footer>
 
   <script>
-    // Check if payment is verified
+    // Check if payment is verified on page load
     document.addEventListener('DOMContentLoaded', () => {
       const paymentVerified = localStorage.getItem('paymentVerified');
-      if (paymentVerified === 'true') {
-        document.getElementById('paymentContainer').style.display = 'none';
-        document.getElementById('loginContainer').style.display = 'block';
+      if (!paymentVerified) {
+        window.location.href = 'subscribe.html';
       }
     });
-
-    function payNow(amount) {
-      var options = {
-        key: 'rzp_test_uQFcbINAsDfHoi',
-        amount: amount,
-        currency: 'INR',
-        name: 'Smart Soil Access Fee',
-        description: 'Unlock login access',
-        handler: function (response) {
-          localStorage.setItem('paymentVerified', 'true');
-          document.getElementById('paymentContainer').style.display = 'none';
-          document.getElementById('loginContainer').style.display = 'block';
-        },
-        modal: {
-          ondismiss: function() {
-            alert('Payment cancelled. Please complete payment to access login.');
-          }
-        },
-        theme: {
-          color: "#4CAF50"
-        }
-      };
-      var rzp = new Razorpay(options);
-      rzp.open();
-    }
   </script>
   <script src="js/auth.js"></script>
 </body>
