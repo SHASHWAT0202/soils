@@ -177,7 +177,7 @@
       <a href="shop.html">Shop Now</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
-      <a href="subscribe.html">Login</a>
+      <a href="register.html">Register</a>
     </nav>
   </header>
 
@@ -197,13 +197,13 @@
   </footer>
 
   <script>
-    // Check if payment is verified on page load
-    document.addEventListener('DOMContentLoaded', () => {
+    // Check if payment is verified immediately
+    (function() {
       const paymentVerified = localStorage.getItem('paymentVerified');
-      if (!paymentVerified) {
+      if (paymentVerified !== 'true') {
         window.location.href = 'subscribe.html';
       }
-    });
+    })();
   </script>
   <script src="js/auth.js"></script>
 </body>
