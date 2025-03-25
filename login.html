@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Login - Agri Solutions</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
     /* Ensure html/body fill the entire viewport */
     html, body {
@@ -111,37 +112,43 @@
       margin-bottom: 20px;
       color: #333;
     }
-    /* Fixed Footer */
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px; /* Increased height for better spacing */
-  background: #2E7D32; /* Consistent color with header */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  gap: 10px; /* Adds spacing between elements */
-}
 
-/* Footer Logo */
-footer img {
-  height: 40px; /* Adjusted for better visibility */
-  width: auto;
-  margin-right: 10px; /* Space between logo and text */
-}
-
-/* Footer Text */
-footer p {
-  margin: 0;
-  font-size: 1rem;
-  color: #fff;
-  text-align: center;
-}
+    /* Add new styles for payment container */
+    .payment-container {
+      max-width: 400px;
+      margin: 100px auto 80px auto;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+    
+    .payment-container h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    .payment-container p {
+      margin-bottom: 20px;
+      color: #666;
+    }
+    
+    .payment-container button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .payment-container button:hover {
+      background-color: #45a049;
+    }
 
     .auth-container form {
       display: flex;
@@ -203,7 +210,15 @@ footer p {
     </nav>
   </header>
 
-  <div class="card auth-container">
+  <!-- Payment Container (shown by default) -->
+  <div id="paymentContainer" class="payment-container">
+    <h2>Access Restricted</h2>
+    <p>To proceed to login, a small access fee of ₹5 is required.</p>
+    <button onclick="payNow(500)">Pay ₹5</button>
+  </div>
+
+  <!-- Login Container (hidden by default) -->
+  <div id="loginContainer" class="card auth-container" style="display: none;">
     <h2>Login</h2>
     <form id="loginForm">
       <input type="email" id="email" placeholder="Email" required />
@@ -218,6 +233,41 @@ footer p {
     <p>&copy; 2025 Smart Soil - All Rights Reserved</p>
   </footer>
 
+  <script>
+    // Check if payment is verified
+    document.addEventListener('DOMContentLoaded', () => {
+      const paymentVerified = localStorage.getItem('paymentVerified');
+      if (paymentVerified === 'true') {
+        document.getElementById('paymentContainer').style.display = 'none';
+        document.getElementById('loginContainer').style.display = 'block';
+      }
+    });
+
+    function payNow(amount) {
+      var options = {
+        key: 'rzp_test_uQFcbINAsDfHoi',
+        amount: amount,
+        currency: 'INR',
+        name: 'Smart Soil Access Fee',
+        description: 'Unlock login access',
+        handler: function (response) {
+          localStorage.setItem('paymentVerified', 'true');
+          document.getElementById('paymentContainer').style.display = 'none';
+          document.getElementById('loginContainer').style.display = 'block';
+        },
+        modal: {
+          ondismiss: function() {
+            alert('Payment cancelled. Please complete payment to access login.');
+          }
+        },
+        theme: {
+          color: "#4CAF50"
+        }
+      };
+      var rzp = new Razorpay(options);
+      rzp.open();
+    }
+  </script>
   <script src="js/auth.js"></script>
 </body>
 </html>
