@@ -4,7 +4,7 @@ const PROTECTED_PAGES = [
     'register.html',
     'dashboard.html',
     'dashboard.html',
-    'research.html',
+    'research.html'
 ];
 
 const PUBLIC_PAGES = [
