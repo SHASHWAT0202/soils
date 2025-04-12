@@ -287,7 +287,7 @@ footer p {
       }
 
       function fetchWeather(lat, lon) {
-        let apiKey = 'bd5e378503939ddaee76f12ad7a97608';
+        let apiKey = '513601470e7400f5a5345a6ecfa6d005';
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
           .then(response => response.json())
           .then(data => {
